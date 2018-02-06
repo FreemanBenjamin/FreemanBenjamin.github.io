@@ -34,10 +34,26 @@
 			<div class = "col-3"></div>
 			<div class = "col-6" id = "pagecontent">
 				<h1>NanoMechanical Testing Device</h1>
-				<h2>Abstract</h2>
-					<p></p>
-				<h2>Introduction</h2>
-					<p></p>
+				<h2>Background</h2>
+					<p>As part of a Senior Capstone Design Project, we were tasked with creating a mechanical testing device capable of operating inside of an SEM. Though the properties of many nanomaterials have been determined from theory and bulk properties, precise data from tests on nanoscale samples is not common. The finished device was expected to be able to manipulate samples at the nanoscale and perform a variety of mechanical tests (Tension, Compression, Fatigue, Bend, etc.). In addition, it needed to be operable and observable <i>in situ </i> in order to see the tests in real time and due to the need to seal the device inside the SEM vacuum chamber. The project was conducted between September 2014 and May 2015 by myself, Qizhong Wang, and Tyler Houseweart in coordination with Dr. Jun Lou's research group. </p>
+				<h2>Design Constraints</h2>
+					<ul>
+						<li>Must fit inside SEM chamber</li>
+						<li>Cannot block camera or be outside of SEM focus limit</li>
+						<li>Easy to modify to conduct different tests</li>
+						<li>Inexpensive (Budget of $2500)</li>
+						<li>User friendly to improve reproducibility of results</li>
+						<li>Inert materials to avoid outgassing in chamber</li>
+						<li>Shielded to prevent EMI interference</li>
+					</ul>
+				<h2>Design</h2>
+					<p>In the final design, the NanoMechanical Tester (left) was comprised of a machined aluminum base, a z-stage for vertical motion, and an xy-stage for horizontal motion. The stages were powered by 3 piezoelectric motors capable of 30nm step sizes. Additionally, a rotational motor was attached to the z-stage to allow for manipulation in different sample orientations. An Atomic Force Microscope (AFM) cantilever was attached to the rotational motor to interface with samples. The motors were wired to a 15-pin connector that connected to an adapter inside of the SEM. This wiring was shielded using copper foil and a ground wire to avoid charge buildup in the chamber.</p>
+				<h2>Testing Method</h2>
+					<p>Using the AFM cantilever (right), it was possible to interact with the sample and determine mechanical properties. As can be seen in the image, the cantilever is comprised of 3 separate cantilevers with known spring constants. Depending on the strength of the sample, one of these cantilevers is brought in contact with the sample. Using a docosane precursor, the sample and cantilever are bonded via an electron-beam induced deposition (EBID) which causes carbon to fuse the two objects. Then, the test can be performed by pulling, bending, or cycling the sample. By using the non-bonded cantilevers as a reference, the force can be determined from the deflection by finding the result of the equation F = k*d, where k is the spring constant of the cantilever, and d is the deflection. </p>
+				<h2>A Demonstration: Determining the Bonding Strength of Carbon Nanotubes Grown on a Graphene Substrate</h2>
+					<p>One test of interest to the Lou Research Group was the strength of Carbon Nanotubes (CNT) grown vertically on a Graphene substrate in a "carpet" structure. In image (a), the cantilever tip is brought in contact with a CNT. Then, using the EBID process, carbon builds up between the sample and probe fusing them together (b). When the bond is complete, the cantilever is steadily pulled away from the graphene substrate until the CNT separates from the surface. Then, by reviewing the video, the deflection of the cantilever at failure can be determined and used to find the strength of the bond. An example of this test can be seen in the video below which has been sped up to 4x the original speed. </p>
+				<h2>Conclusion</h2>
+					<p>A Nanomechanical Tester capable of manipulating nanoscale specimens inside of an SEM was designed, fabricated, and tested. Such capabilities will allow for the determination of new properties, analysis of novel nanomaterials and structures, and comparison to theoretical or bulk properties. The device has continued to be utilized by the Lou Research Group for a variety of nanomaterials in the exploration of their properties at the nanoscale. Here is a <a href = "http://pubs.rsc.org/-/content/articlelanding/2017/nr/c6nr09897e/unauth#!divAbstract">recent paper</a> from 2017 using the device to examine the aforementioned CNT/Graphene nanostructures.
 				<h2>Design Showcase Poster</h2>
 				<div id = "poster"><iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSr4qaXkP9KH5AkJPC9kCixTqNoHOYn1xTr8ryLvnZQ7eAgep5Fp9QVDHgxW6Qa0yvZfWgOg3GxCLNs/embed?start=false&loop=false&delayms=60000" frameborder="0" width="2304" height="1757" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe></div>
 			</div>
