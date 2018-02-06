@@ -220,8 +220,7 @@ footer {
 	text-decoration: none;
 }
 
-[data-toggle="tooltip"] {
-	left: 120%
+.tooltip.right {
 	background-color: #dbc3a3;
 	color: #76323F;
 }
