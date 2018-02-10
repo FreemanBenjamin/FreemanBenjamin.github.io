@@ -187,6 +187,9 @@ img {
 	max-height: 50%;
 	display: inline-block;
 	padding-bottom: 10px;
+	padding-top: 10px;
+	padding-left: 0;
+	padding-right: 0;
 }
 
 #printer {
