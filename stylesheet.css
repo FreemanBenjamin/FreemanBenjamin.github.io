@@ -196,6 +196,7 @@ img {
 	padding-top: 10px;
 	padding-left: 0;
 	padding-right: 0;
+	vertical-align: top;
 }
 
 figure {
