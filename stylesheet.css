@@ -185,7 +185,8 @@ p > a:visited {
 img {
 	max-width: 50%;
 	max-height: 50%;
-	display: inline-block;
+	float: left;
+	display: block
 	padding-bottom: 10px;
 	padding-top: 10px;
 	padding-left: 0;
