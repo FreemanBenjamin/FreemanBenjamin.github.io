@@ -202,7 +202,7 @@ img {
 
 figure {
 	float: left;
-	display: block
+	display: inline-block
 	padding-bottom: 10px;
 	padding-top: 10px;
 	padding-left: 0;
