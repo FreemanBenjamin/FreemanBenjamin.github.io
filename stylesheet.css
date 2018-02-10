@@ -190,10 +190,12 @@ p > a:visited {
 	padding-bottom: 10px;
 }
 
-figure {
-	float: left;
+img {
 	max-width: 50%;
 	max-height: 50%;
+}
+
+figure {
 	float: left;
 	display: block
 	padding-bottom: 10px;
