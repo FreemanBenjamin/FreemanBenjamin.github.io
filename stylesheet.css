@@ -182,16 +182,6 @@ p > a:visited {
 	hyphens: auto;
 }
 
-img {
-	max-width: 50%;
-	max-height: 50%;
-	float: left;
-	display: block
-	padding-bottom: 10px;
-	padding-top: 10px;
-	padding-left: 0;
-	padding-right: 0;
-}
 
 #printer {
 	max-width: 100%;
@@ -200,8 +190,16 @@ img {
 	padding-bottom: 10px;
 }
 
-figure img {
-	vertical-align: top;
+figure {
+	float: left;
+	max-width: 50%;
+	max-height: 50%;
+	float: left;
+	display: block
+	padding-bottom: 10px;
+	padding-top: 10px;
+	padding-left: 0;
+	padding-right: 0;
 }
 
 figcaption {
