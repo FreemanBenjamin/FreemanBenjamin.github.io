@@ -201,9 +201,8 @@ img {
 }
 
 figure {
-	float: left;
-	max-width: 50%;
-	display: inline-block;
+	max-width: 100%;
+	display: block
 	padding-bottom: 10px;
 	padding-top: 10px;
 	padding-left: 0;
