@@ -209,6 +209,10 @@ figure {
 	text-align: center;
 }
 
+.bonding {
+	min-width: 100%;
+}
+
 iframe {
 	padding-top: 20px;
 	margin: auto;
