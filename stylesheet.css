@@ -209,6 +209,10 @@ figure {
 	text-align: center;
 }
 
+#cantilever {
+	min-width: 50%;
+}
+
 .bonding {
 	min-width: 100%;
 }
