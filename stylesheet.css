@@ -219,6 +219,7 @@ figure {
 
 iframe {
 	padding-top: 20px;
+	paddint-bottom: 20px;
 	margin: auto;
 	display: block;
 	width: 640px;
