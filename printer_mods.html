@@ -1,0 +1,59 @@
+<!--Code and design by Benjamin Freeman
+	benjamin.freeman2015@gmail.com
+	Copyright Benjamin Freeman 2017-->
+<html>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+	<link href="https://FreemanBenjamin.github.io/stylesheet.css" rel="stylesheet" type="text/css">
+	<script  src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="  crossorigin="anonymous"></script>
+
+	<head>
+		<title> 
+			Benjamin Freeman - Materials Engineer
+		</title>
+	</head>
+
+	<div id = "container-fluid">
+	<body>
+		<header>
+			<b><div>Benjamin Freeman<br></div>
+			<div id = "subtitle">Materials Engineer</div></b>
+		</header>
+
+		<div id="navbar"></div>
+
+		<script type = "text/javascript">
+			$(document).ready(function(){
+  				$("#navbar").load("navbar.html");
+			});
+		</script>
+
+		<div class = "row">
+			<div class = "col-3"></div>
+			<div class = "col-6" id = "pagecontent">
+				<h1>3D Printer Modifications</h1>
+					<p>The first major modification that I have made to my CR-10S is a new cooling fan holder. <a href = "https://www.thingiverse.com/thing:2544186">This holder</a> improves the clearance and visibility of the print bed, and the "fang" design improves air flow to the hot end nozzle. I am currently still using the original fans, but I eventually hope to replace them with higher-pwowered options.</p>
+					<p>Additionally, I have made several smaller modifications to improve print quality and ease of use. The first is a mirror tile to replace the original glass bed. I was having difficulty getting even adhesion and leveling, and CR-10 glass is notorious for being warped, so I swapped it out for a basic mirror tile.</p>
+					<p>Next, I printed larger <a href = "https://www.thingiverse.com/thing:2408748">adjustment knobs</a> to make leveling the bed more comfortable and accessible. The original knobs are very small and somewhat difficult to reach. These new knobs fit securely over the old ones and make adjusting on the fly much easier.</p>
+					<p>Finally, I printed this adjustable <a href = "https://www.thingiverse.com/thing:2553067">spool holder</a> that fits over the stock piece. The spool holder provided is too small for most filament spools making it more difficult for the extruder to draw filament. This threaded piece fits easily over the original and is adjustable for different spool sizes.</p>
+					<p>Future modifications will likely include vibration and noise-dampening feet for the printer and control box, stepper motor dampers, and potentially an Octopi setup to remotely monitor and control prints.</p>
+									
+			</div>
+			<div class = "col-3"></div>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	</body>
+	</div>
+	<div id="footer"></div>
+
+	<script type = "text/javascript">
+		$(document).ready(function(){
+			$("#footer").load("footer.html");
+		});
+	</script>
+
+	</div>
+</html>
