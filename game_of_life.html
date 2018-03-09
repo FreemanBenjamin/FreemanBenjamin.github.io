@@ -51,25 +51,28 @@
 				<p class = "codesnippet">grid = np.zeroes(grid_size, grid_size)</p>
 				<P>Using numpy, we can generate an nxn grid of zeroes by giving an x and y parameter. Here I use the variable "grid_size" which I will later set by asking the user for an input.</P>
 				<p>Now that we have a board, we need to check for living neighbors. Since we created an array of zeroes, we will represent "dead" cells with a zero value and "live" cells with a value of 1.  Then, it is a simple task of totaling the number of nearest neighbors for each cell and determining if it will be alive or dead in the next generation.</p>
-				<p class = "codesnippet">def check_for_life(x, y):
-				 neighbors = np.sum(grid[x-1:x+2, y-1:y+2]) - grid[x, y]
-				 if grid[x, y] and not 2 <= neighbors <= 3:
-			     		return 0
-			     elif neighbors == 3:
-			     		return 1
-			     return grid[x, y]</p>
+				<p class = "codesnippet">
+				def check_for_life(x, y):
+					neighbors = np.sum(grid[x-1:x+2, y-1:y+2]) - grid[x, y]
+					if grid[x, y] and not 2 <= neighbors <= 3:
+				     		return 0
+				    elif neighbors == 3:
+				     		return 1
+				    return grid[x, y]</p>
 				<p>The check_for_life function takes two parameters x and y for the position of the cell. Then, it sums the values of every adjacent cell (and the cell in question which is subtracted out). If the cell has 2 or 3 neighbors, the function returns 1 and otherwise returns 0. Next, using this function, we can iterate through each generation using the following function:</p>
-				<p class = "codesnippet">def generations():
-			    global grid
-			    grid_update = np.copy(grid)
-			    for x in range(grid.shape[0]):
-			        	for y in range(grid.shape[1]):
-			            	grid_update[x, y] = check_for_life(x, y)
+				<p class = "codesnippet">
+				def generations():
+				    global grid
+				    grid_update = np.copy(grid)
+				    for x in range(grid.shape[0]):
+				        	for y in range(grid.shape[1]):
+				            	grid_update[x, y] = check_for_life(x, y)
 
-				    grid = np.copy(grid_update)</p>
+					grid = np.copy(grid_update)</p>
 				<p>First, we have to create a copy of the grid to write the next generation to. If not, we will be updating the grid values in place and will get an inaccurate value for nearest neighbors. Then, we can iterate across the entire array to create the new grid by calling check_for_life. Finally, this new grid is copied to the "grid" variable once all of the nearest neighbors have been determined. These 2 functions are essentially all that we need to play the game. Now that we have a way to operate the game, we can set our initial seeds. I have provided a dictionary of possible seed options to choose from at the start of the program. From here, I run a series of input functions (and some try/except statements to avoid throwing errors) to ask the user for the board size, number of generations, seed to initialize, and starting coordinates for the seed.</p>
 				<p>To save the board for each generation, we can store each board figure in a list and call the generations function using a simple for loop:</p>
-				<p class = "codesnippet">gens = []
+				<p class = "codesnippet">
+				gens = []
 				for i in range(num_gens):
 				    	title = plt.text(1, -1, 'Generation ' + str(i))
 				    	gens.append((plt.imshow(grid, cmap='winter'), title,))
