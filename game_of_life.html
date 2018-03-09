@@ -37,6 +37,7 @@
 				<h1>Conway's Game of Life</h1>
 				<h2>Background</h2>
 				<p>John Conway's "Game of Life" was first introduced to me in a Computational and Applied Mathematics course at Rice University. It was the first "major" project assigned to us in which we had to model the game using MATLAB. I found the game to be quite beautiful in its simplicity, and it is a good chance to practice several programmatic concepts. The "board" consists of a 2D array of cells, and he game takes place autonomously of the user after the conditions and an initial state is set. The basic rules are quite simple:</p>
+				
 				<ol>
 					<li>A cell will "live" to the next generation if it has exactly 2 or 3 neighbors.</li>
 					<li>A cell will "die" if it has less than 2 neighbors (underpopulatoin)</li>
@@ -51,28 +52,28 @@
 				<P>Using numpy, we can generate an nxn grid of zeroes by giving an x and y parameter. Here I use the variable "grid_size" which I will later set by asking the user for an input.</P>
 				<p>Now that we have a board, we need to check for living neighbors. Since we created an array of zeroes, we will represent "dead" cells with a zero value and "live" cells with a value of 1.  Then, it is a simple task of totaling the number of nearest neighbors for each cell and determining if it will be alive or dead in the next generation.</p>
 				<p class = "codesnippet">def check_for_life(x, y):
-						 neighbors = np.sum(grid[x-1:x+2, y-1:y+2]) - grid[x, y]
-						 if grid[x, y] and not 2 <= neighbors <= 3:
-					     		return 0
-					     elif neighbors == 3:
-					     		return 1
-					     return grid[x, y]</p>
+					 neighbors = np.sum(grid[x-1:x+2, y-1:y+2]) - grid[x, y]
+					 if grid[x, y] and not 2 <= neighbors <= 3:
+				     		return 0
+				     elif neighbors == 3:
+				     		return 1
+				     return grid[x, y]</p>
 				<p>The check_for_life function takes two parameters x and y for the position of the cell. Then, it sums the values of every adjacent cell (and the cell in question which is subtracted out). If the cell has 2 or 3 neighbors, the function returns 1 and otherwise returns 0. Next, using this function, we can iterate through each generation using the following function:</p>
 				<p class = "codesnippet">def generations():
-					    global grid
-					    grid_update = np.copy(grid)
-					    for x in range(grid.shape[0]):
-					        	for y in range(grid.shape[1]):
-					            	grid_update[x, y] = check_for_life(x, y)
+				    global grid
+				    grid_update = np.copy(grid)
+				    for x in range(grid.shape[0]):
+				        	for y in range(grid.shape[1]):
+				            	grid_update[x, y] = check_for_life(x, y)
 
 					    grid = np.copy(grid_update)</p>
 				<p>First, we have to create a copy of the grid to write the next generation to. If not, we will be updating the grid values in place and will get an inaccurate value for nearest neighbors. Then, we can iterate across the entire array to create the new grid by calling check_for_life. Finally, this new grid is copied to the "grid" variable once all of the nearest neighbors have been determined. These 2 functions are essentially all that we need to play the game. Now that we have a way to operate the game, we can set our initial seeds. I have provided a dictionary of possible seed options to choose from at the start of the program. From here, I run a series of input functions (and some try/except statements to avoid throwing errors) to ask the user for the board size, number of generations, seed to initialize, and starting coordinates for the seed.</p>
 				<p>To save the board for each generation, we can store each board figure in a list and call the generations function using a simple for loop:</p>
-				<p class = "codesnippet>">gens = []
-					for i in range(num_gens):
-					    	title = plt.text(1, -1, 'Generation ' + str(i))
-					    	gens.append((plt.imshow(grid, cmap='winter'), title,))
-					    	generations()</p>
+				<p class = "codesnippet">gens = []
+				for i in range(num_gens):
+				    	title = plt.text(1, -1, 'Generation ' + str(i))
+				    	gens.append((plt.imshow(grid, cmap='winter'), title,))
+				    	generations()</p>
 				<p>Finally, utilizing matplotlib's animation function, we can visualize the board by displaying a figure for every generation at an interval specified in milliseconds:</p>
 				<p class = "codesnippet">gens_animation = animation.ArtistAnimation(fig, gens, interval=200, blit=False)</p> 
 				<p>I've also included some code to save the animation as a .mp4 file for the purpose of showing the animations, but I won't talk through it here.</p>
@@ -129,12 +130,13 @@
 				</div>
 				<p>Just for fun, here is another popular pattern known as the R-pentomino. This pattern stabilizes at generation 1103 but starts as only 5 living cells. It creates a number of interesting patterns and is particularly of note because it led to the discovery of the glider.</p>
 				<figure>
-					<img src = "images/R-pentomino.gif"/>
+					<img src = "images/r-pentomino.gif"/>
 					<figcaption>R-pentomino</figcaption>
 				</figure>
 				<p>There are countless different seeds with different behaviors, and this code can easily be modified to accomodate them by simply adding a new dictionary entry with the seed name and array of binary values.</p>
 				<h2>Conclusions</h2>
 			This code was programmatically interesting a in a few ways. First, determining the operations needed to define the rules and iterate over the generations utilizes some very fundamental programming practices and was an interesting logic problem. Addtionally, determining how to let the user interact with the code was quite challenging. Initially, I thought that allowing the user to create a new array for the seed values would be the best approach. However, creating larger arrays can be a bit tedious and leaves a lot of room for error, so I wound up opting for a more uninteractive method. Creating some sort of UI would potentially be a good way to make seed creation more accessible. Finally, this gave me some exposure to the numpy and matplotlib libraries whcih are generally considered to be quite powerful for data analysis, scientific computing, displaying information, and a variety of other uses.</p>
+
 			<p>There are several improvements I could make in the future, but I think primarily that I would look at using classes with cells as objects. I feel that this might be a better way of organizing the code and performing operations. Ultimately, I think that this is a decent representation of the Game of Life, and it was very rewarding to work through.</p>
 
 
