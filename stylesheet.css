@@ -251,15 +251,24 @@ footer {
 	color: #565656;
 }
 
+#navbutton {
+	background-color: #565656;
+	color: white;
+}
+
+#navbutton:hover {
+	background-color: #dbc3a3;
+	color: #76323F;
+}
+
 .social {
 	border-radius: 50%;
 	padding: 10px;
 	margin: 10px;
 	background-color: #D7CEC7;
-	boder: 0px;
 }
 
-#social:hover {
+.social:hover {
 	color: #76323F;
 	background-color: #dbc3a3;
 	text-decoration: none;
