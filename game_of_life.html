@@ -46,7 +46,7 @@
 				</ol>
 				<p>More information can be found in the <a href = "https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" target = "_blank">Wikipedia article</a>, but this is the essence of the game. 
 				<h2>Code</h2>
-				<p>Note: This code was primarily a practice exercise for me. I utilized other examples to improve the flow of my code and to determine which libraries would be useful.</p>
+				<p>Note: This code was primarily a practice exercise for me. I utilized other examples to improve the flow of my code and to determine which libraries would be useful. Please feel free to view the full code on <a href = "https://github.com/FreemanBenjamin/game_of_life" target = "_blank">GitHub</a></p>
 				<p>For this program, we will use the numpy and matplotlib libraries for python. The first thing we will need to do is create our game board (which I will refer to as "grid"):</p>
 				<pre class = "codesnippet">grid = np.zeroes(grid_size, grid_size)</pre>
 				<P>Using numpy, we can generate an nxn grid of zeroes by giving an x and y parameter. Here I use the variable "grid_size" which I will later set by asking the user for an input.</P>
@@ -138,8 +138,6 @@ for i in range(num_gens):
 				<p>This code was programmatically interesting a in a few ways. First, determining the operations needed to define the rules and iterate over the generations utilizes some very fundamental programming practices and was an interesting logic problem. Addtionally, determining how to let the user interact with the code was quite challenging. Initially, I thought that allowing the user to create a new array for the seed values would be the best approach. However, creating larger arrays can be a bit tedious and leaves a lot of room for error, so I wound up opting for a more uninteractive method. Creating some sort of UI would potentially be a good way to make seed creation more accessible. Finally, this gave me some exposure to the numpy and matplotlib libraries whcih are generally considered to be quite powerful for data analysis, scientific computing, displaying information, and a variety of other uses.</p>
 
 				<p>There are several improvements I could make in the future, but I think primarily that I would look at using classes with cells as objects. I feel that this might be a better way of organizing the code and performing operations. Ultimately, I think that this is a decent representation of the Game of Life, and it was very rewarding to work through.</p>
-
-
 			</div>
 			<div class = "col-lg-3"></div>
 				
