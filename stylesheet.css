@@ -251,14 +251,23 @@ footer {
 	color: #565656;
 }
 
+.fa-bars {
+	color: white;
+}
+
+.fa-bars:hover{
+	color: #76323F;
+
+}
+
 #navbutton {
 	background-color: #565656;
-	color: white;
+	border: 0;
 }
 
 #navbutton:hover {
 	background-color: #dbc3a3;
-	color: #76323F;
+	border: 0;
 }
 
 .social {
