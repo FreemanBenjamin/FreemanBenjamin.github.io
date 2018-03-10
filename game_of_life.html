@@ -54,7 +54,7 @@
 				<pre class = "codesnippet">def check_for_life(x, y):
 	neighbors = np.sum(grid[x-1:x+2, y-1:y+2]) - grid[x, y]
 	if grid[x, y] and not 2 <= neighbors <= 3:
-     	return 0
+		return 0
     elif neighbors == 3:
      	return 1
     return grid[x, y]</pre>
@@ -70,10 +70,10 @@
 				<p>First, we have to create a copy of the grid to write the next generation to. If not, we will be updating the grid values in place and will get an inaccurate value for nearest neighbors. Then, we can iterate across the entire array to create the new grid by calling check_for_life. Finally, this new grid is copied to the "grid" variable once all of the nearest neighbors have been determined. These 2 functions are essentially all that we need to play the game. Now that we have a way to operate the game, we can set our initial seeds. I have provided a dictionary of possible seed options to choose from at the start of the program. From here, I run a series of input functions (and some try/except statements to avoid throwing errors) to ask the user for the board size, number of generations, seed to initialize, and starting coordinates for the seed.</p>
 				<p>To save the board for each generation, we can store each board figure in a list and call the generations function using a simple for loop:</p>
 				<pre class = "codesnippet">gens = []
-	for i in range(num_gens):
-    	title = plt.text(1, -1, 'Generation ' + str(i))
-    	gens.append((plt.imshow(grid, cmap='winter'), title,))
-    	generations()</pre>
+for i in range(num_gens):
+	title = plt.text(1, -1, 'Generation ' + str(i))
+	gens.append((plt.imshow(grid, cmap='winter'), title,))
+	generations()</pre>
 				<p>Finally, utilizing matplotlib's animation function, we can visualize the board by displaying a figure for every generation at an interval specified in milliseconds:</p>
 				<p reclass = "codesnippet">gens_animation = animation.ArtistAnimation(fig, gens, interval=200, blit=False)</pre> 
 				<p>I've also included some code to save the animation as a .mp4 file for the purpose of showing the animations, but I won't talk through it here.</p>
