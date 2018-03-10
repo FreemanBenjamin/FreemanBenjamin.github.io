@@ -34,77 +34,110 @@
 		<div class = "row">
 			<div class = "col-lg-3"></div>
 			<div class = "col-lg-6 col-md-12" id = "pagecontent">
-				<h1>Latest Project</h1>
-				<h2>Headphone Holder</h2>
-					<img src = "images/headphone_holder.jpg"></img>
-					<p>To save space on my desk, I designed and printed this headphone holder. The design is fairly simple - I essentially modeled it after a wall-mounted hose hanger. To start, I sketched the profile of the rounded portion in 2D. As can be seen in the drawing, this consisted of a solid back wall, the surface for the headphones to sit on top of, and raised edges on either side to prevent slipping. Then, using this sketch, I revolved it 180 degrees to create the arched portion. To make the holder adaptable to different sizes of desks, I then created two ledges spaced apart from each other - one to place on top of the desk, and another with a hole for a screw that could be used to tighten the holder against the lip of the desk. Using Autodesk's parts library, I made a hole for an M10 screw and imported a pre-built M10 hex-head screw for the assembly. Then, I plated the screw and holder files and generated the stl files to print. Unfortunately, as can be seen in the images below, I neglected to add supports to the first print. Surprisingly, the arched portion printed successfully until the very top of the arch. However, the upper ledge failed for the first few layers and left a large quantity of unbonded filament. I attempted to flatten the layers with a heat gun and clean metal scraper, but I was not successful.</p>
-					<div class = "row">
-						<div class = "col-md-6 col-sm-12">
-							<figure>
-								<img src = "images/headphone_holder_v1_underside.jpg"/>
-								<figcaption>Underside of arch with no supports</figcaption>
-							</figure>
-						</div>
-						<div class = "col-md-6 col-sm-12">
-							<figure>
-								<img src = "images/headphone_holder_v1_nosupport.jpg"/>
-								<figcaption>Underside of upper ledge with no supports</figcaption>
-							</figure>
-						</div>
+				<h1>Latest Project: Conway's Game of Life</h1>
+				<h2>Background</h2>
+				<p>John Conway's "Game of Life" was first introduced to me in a Computational and Applied Mathematics course at Rice University. It was the first "major" project assigned to us in which we had to model the game using MATLAB. I found the game to be quite beautiful in its simplicity, and it is a good chance to practice several programmatic concepts. The "board" consists of a 2D array of cells, and he game takes place autonomously of the user after the conditions and an initial state is set. The basic rules are quite simple:</p>
+
+				<ol>
+					<li>A cell will "live" to the next generation if it has exactly 2 or 3 neighbors.</li>
+					<li>A cell will "die" if it has less than 2 neighbors (underpopulatoin)</li>
+					<li>A cell will "die" if it has more than 3 neighbors (overpopulation)</li>
+					<li>New cells are created when there are 3 "living" neighbors (reproduction)</li>
+				</ol>
+				<p>More information can be found in the <a href = "https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" target = "_blank">Wikipedia article</a>, but this is the essence of the game. 
+				<h2>Code</h2>
+				<p>Note: This code was primarily a practice exercise for me. I utilized other examples to improve the flow of my code and to determine which libraries would be useful.</p>
+				<p>For this program, we will use the numpy and matplotlib libraries for python. The first thing we will need to do is create our game board (which I will refer to as "grid"):</p>
+				<pre class = "codesnippet">grid = np.zeroes(grid_size, grid_size)</pre>
+				<P>Using numpy, we can generate an nxn grid of zeroes by giving an x and y parameter. Here I use the variable "grid_size" which I will later set by asking the user for an input.</P>
+				<p>Now that we have a board, we need to check for living neighbors. Since we created an array of zeroes, we will represent "dead" cells with a zero value and "live" cells with a value of 1.  Then, it is a simple task of totaling the number of nearest neighbors for each cell and determining if it will be alive or dead in the next generation.</p>
+				<pre class = "codesnippet">def check_for_life(x, y):
+	neighbors = np.sum(grid[x-1:x+2, y-1:y+2]) - grid[x, y]
+	if grid[x, y] and not 2 <= neighbors <= 3:
+		return 0
+	elif neighbors == 3:
+		return 1
+	return grid[x, y]</pre>
+				<p>The check_for_life function takes two parameters x and y for the position of the cell. Then, it sums the values of every adjacent cell (and the cell in question which is subtracted out). If the cell has 2 or 3 neighbors, the function returns 1 and otherwise returns 0. Next, using this function, we can iterate through each generation using the following function:</p>
+				<pre class = "codesnippet">def generations():
+	global grid
+	grid_update = np.copy(grid)
+	for x in range(grid.shape[0]):
+		for y in range(grid.shape[1]):
+			grid_update[x, y] = check_for_life(x, y)
+
+	grid = np.copy(grid_update)</pre>
+				<p>First, we have to create a copy of the grid to write the next generation to. If not, we will be updating the grid values in place and will get an inaccurate value for nearest neighbors. Then, we can iterate across the entire array to create the new grid by calling check_for_life. Finally, this new grid is copied to the "grid" variable once all of the nearest neighbors have been determined. These 2 functions are essentially all that we need to play the game. Now that we have a way to operate the game, we can set our initial seeds. I have provided a dictionary of possible seed options to choose from at the start of the program. From here, I run a series of input functions (and some try/except statements to avoid throwing errors) to ask the user for the board size, number of generations, seed to initialize, and starting coordinates for the seed.</p>
+				<p>To save the board for each generation, we can store each board figure in a list and call the generations function using a simple for loop:</p>
+				<pre class = "codesnippet">gens = []
+for i in range(num_gens):
+	title = plt.text(1, -1, 'Generation ' + str(i))
+	gens.append((plt.imshow(grid, cmap='winter'), title,))
+	generations()</pre>
+				<p>Finally, utilizing matplotlib's animation function, we can visualize the board by displaying a figure for every generation at an interval specified in milliseconds:</p>
+				<pre class = "codesnippet">gens_animation = animation.ArtistAnimation(fig, gens, interval=200, blit=False)</pre> 
+				<p>I've also included some code to save the animation as a .mp4 file for the purpose of showing the animations, but I won't talk through it here.</p>
+				<h2>Putting it All Together</h2>
+				<p>Now that we have the code to play the game and display it, we can run the seeds and see some interesting behaviors. The first class of objects are static which I have not included here. Objects such as a 2x2 square do not result in new life or death and therefore remain constant across multiple generations. The next class of objects are oscillators.</p>
+				<div class = "row">
+					<div class = "col-md-12 col-lg-6">
+						<figure>
+							<img src = "images/blinker.gif"/>
+							<figcaption>Blinker</figcaption>
+						</figure>				
 					</div>
-					<p>For the second print, I decreased the size of the raised edges on either side of the arch and generated supports for areas where overhang was greater than 80%. The supports can be seen in the two images below.</p>
-					<div class = "row">
-						<div class = "col-md-6 col-sm-12">
-							<figure>
-								<img src = "images/headphone_holder_v2_archsupport.jpg"/>
-								<figcaption>Arch with supports</figcaption>
-							</figure>
-						</div>
-						<div class = "col-md-6 col-sm-12">
-							<figure>
-								<img src = "images/headphone_holder_v2_support.jpg"/>
-								<figcaption>Upper ledge with supports</figcaption>
-							</figure>
-						</div>
+					<div class = "col-md-12 col-lg-6">
+						<figure>
+							<img src = "images/beacon.gif"/>
+							<figcaption>Beacon</figcaption>
+						</figure>	
 					</div>
-					<p>After removing the supports, I used a tap and die set to thread the hole and screw using M10 x 1.5 threading.</p>
-					<div class = "row">
-						<div class = "col-md-6 col-sm-12">
-							<figure>
-								<img src = "images/holder_screw.jpg"/>
-								<figcaption>M10 x 1.5 threaded screw</figcaption>
-							</figure>
-						</div>
-						<div class = "col-md-6 col-sm-12">
-							<figure>
-								<img src = "images/holder_bottom.jpg"/>
-								<figcaption>M10 x 1.5 threaded hole</figcaption>
-							</figure>
-						</div>
+				</div>
+				<p>The simplest forms, such as the Beacon and Blinker patterns above, oscillate across 2 generations. More complex patterns can result in oscillators across more generations or can degenerate into oscillators.</p>
+				<div class = "row">
+					<div class = "col-md-12 col-lg-6">
+						<figure>
+							<img src = "images/pulsar.gif"/>
+							<figcaption>Pulsar</figcaption>
+						</figure>				
 					</div>
-					<p>The assembled headphone holder can be seen in the following images. The only change that I would potentially make to the design would be to decrease the total width of the holder, but it easily supports my current headphones, fits snugly against the desk, and feels quite sturdy.</p>
-					<div class = "row">
-						<div class = "col-md-6 col-sm-12">
-							<figure>
-								<img src = "images/holder_front.jpg"/>
-								<figcaption>Front view</figcaption>
-							</figure>
-							<figure>
-								<img src = "images/holder_back.jpg"/>
-								<figcaption>Rear view</figcaption>
-							</figure>
-						</div>
-						<div class = "col-md-6 col-sm-12">
-							<figure>
-								<img src = "images/holder_side_detail.jpg"/>
-								<figcaption>Side details</figcaption>
-							</figure>
-							<figure>
-								<img src = "images/holder_side.jpg"/>
-								<figcaption>Side view</figcaption>
-							</figure>
-						</div>
+					<div class = "col-md-12 col-lg-6">
+						<figure>
+							<img src = "images/X-pattern.gif"/>
+							<figcaption>X-pattern becoming an oscillator</figcaption>
+						</figure>	
 					</div>
+				</div>
+				<p>Some seeds will eventually find a stable, static result.</p>
+					<figure>
+						<img src = "images/L-pattern.gif"/>
+						<figcaption>L-pattern becoming static</figcaption>
+					</figure>	
+				<p>In some cases, seeds can continue on in perpetuity unless they reach another object or the edge of the game board as can be seen from the Spaceship and Glider below. Some of these patterns can even be generated from other seeds. A famous example is the <a href = "https://en.wikipedia.org/wiki/Gun_(cellular_automaton)#/media/File:Gospers_glider_gun.gif" target = "_blank">Glider Gun</a> as well as the <a href = "https://en.wikipedia.org/wiki/Rake_(cellular_automaton)#/media/File:Rake_selection.gif" target = "_blank">Rake</a>.</p>
+				<div class = "row">
+					<div class = "col-md-12 col-lg-6">
+						<figure>
+							<img src = "images/spaceship.gif"/>
+							<figcaption>Spaceship</figcaption>
+						</figure>				
+					</div>
+					<div class = "col-md-12 col-lg-6">
+						<figure>
+							<img src = "images/glider.gif"/>
+							<figcaption>Glider</figcaption>
+						</figure>	
+					</div>
+				</div>
+				<p>Just for fun, here is another popular pattern known as the R-pentomino. This pattern stabilizes at generation 1103 but starts as only 5 living cells. It creates a number of interesting patterns and is particularly of note because it led to the discovery of the glider.</p>
+				<figure>
+					<img src = "images/r-pentomino.gif"/>
+					<figcaption>R-pentomino</figcaption>
+				</figure>
+				<p>There are countless different seeds with different behaviors, and this code can easily be modified to accomodate them by simply adding a new dictionary entry with the seed name and array of binary values.</p>
+				<h2>Conclusions</h2>
+				<p>This code was programmatically interesting a in a few ways. First, determining the operations needed to define the rules and iterate over the generations utilizes some very fundamental programming practices and was an interesting logic problem. Addtionally, determining how to let the user interact with the code was quite challenging. Initially, I thought that allowing the user to create a new array for the seed values would be the best approach. However, creating larger arrays can be a bit tedious and leaves a lot of room for error, so I wound up opting for a more uninteractive method. Creating some sort of UI would potentially be a good way to make seed creation more accessible. Finally, this gave me some exposure to the numpy and matplotlib libraries whcih are generally considered to be quite powerful for data analysis, scientific computing, displaying information, and a variety of other uses.</p>
+
+				<p>There are several improvements I could make in the future, but I think primarily that I would look at using classes with cells as objects. I feel that this might be a better way of organizing the code and performing operations. Ultimately, I think that this is a decent representation of the Game of Life, and it was very rewarding to work through.</p>
 			</div>
 			<div class = "col-lg-3"></div>
 				

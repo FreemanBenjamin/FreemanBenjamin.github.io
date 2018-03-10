@@ -55,16 +55,16 @@
 	neighbors = np.sum(grid[x-1:x+2, y-1:y+2]) - grid[x, y]
 	if grid[x, y] and not 2 <= neighbors <= 3:
 		return 0
-    elif neighbors == 3:
-     	return 1
-    return grid[x, y]</pre>
+	elif neighbors == 3:
+		return 1
+	return grid[x, y]</pre>
 				<p>The check_for_life function takes two parameters x and y for the position of the cell. Then, it sums the values of every adjacent cell (and the cell in question which is subtracted out). If the cell has 2 or 3 neighbors, the function returns 1 and otherwise returns 0. Next, using this function, we can iterate through each generation using the following function:</p>
 				<pre class = "codesnippet">def generations():
-    global grid
-    grid_update = np.copy(grid)
-    for x in range(grid.shape[0]):
-        for y in range(grid.shape[1]):
-            grid_update[x, y] = check_for_life(x, y)
+	global grid
+	grid_update = np.copy(grid)
+	for x in range(grid.shape[0]):
+		for y in range(grid.shape[1]):
+			grid_update[x, y] = check_for_life(x, y)
 
 	grid = np.copy(grid_update)</pre>
 				<p>First, we have to create a copy of the grid to write the next generation to. If not, we will be updating the grid values in place and will get an inaccurate value for nearest neighbors. Then, we can iterate across the entire array to create the new grid by calling check_for_life. Finally, this new grid is copied to the "grid" variable once all of the nearest neighbors have been determined. These 2 functions are essentially all that we need to play the game. Now that we have a way to operate the game, we can set our initial seeds. I have provided a dictionary of possible seed options to choose from at the start of the program. From here, I run a series of input functions (and some try/except statements to avoid throwing errors) to ask the user for the board size, number of generations, seed to initialize, and starting coordinates for the seed.</p>
@@ -75,7 +75,7 @@ for i in range(num_gens):
 	gens.append((plt.imshow(grid, cmap='winter'), title,))
 	generations()</pre>
 				<p>Finally, utilizing matplotlib's animation function, we can visualize the board by displaying a figure for every generation at an interval specified in milliseconds:</p>
-				<p reclass = "codesnippet">gens_animation = animation.ArtistAnimation(fig, gens, interval=200, blit=False)</pre> 
+				<pre class = "codesnippet">gens_animation = animation.ArtistAnimation(fig, gens, interval=200, blit=False)</pre> 
 				<p>I've also included some code to save the animation as a .mp4 file for the purpose of showing the animations, but I won't talk through it here.</p>
 				<h2>Putting it All Together</h2>
 				<p>Now that we have the code to play the game and display it, we can run the seeds and see some interesting behaviors. The first class of objects are static which I have not included here. Objects such as a 2x2 square do not result in new life or death and therefore remain constant across multiple generations. The next class of objects are oscillators.</p>
@@ -113,7 +113,7 @@ for i in range(num_gens):
 						<img src = "images/L-pattern.gif"/>
 						<figcaption>L-pattern becoming static</figcaption>
 					</figure>	
-				<p>In some cases, seeds can continue on in perpetuity unless they reach another object or the edge of the game board as can be seen from the Spaceship and Glider below. Some of these patterns can even be generated from other seeds. A famous example is the <a href = "https://en.wikipedia.org/wiki/Gun_(cellular_automaton)#/media/File:Gospers_glider_gun.gif">Glider Gun</a> as well as the <a href = "https://en.wikipedia.org/wiki/Rake_(cellular_automaton)#/media/File:Rake_selection.gif">Rake</a>.</p>
+				<p>In some cases, seeds can continue on in perpetuity unless they reach another object or the edge of the game board as can be seen from the Spaceship and Glider below. Some of these patterns can even be generated from other seeds. A famous example is the <a href = "https://en.wikipedia.org/wiki/Gun_(cellular_automaton)#/media/File:Gospers_glider_gun.gif" target = "_blank">Glider Gun</a> as well as the <a href = "https://en.wikipedia.org/wiki/Rake_(cellular_automaton)#/media/File:Rake_selection.gif" target = "_blank">Rake</a>.</p>
 				<div class = "row">
 					<div class = "col-md-12 col-lg-6">
 						<figure>
