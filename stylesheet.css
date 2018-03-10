@@ -263,11 +263,13 @@ footer {
 #navbutton {
 	background-color: #565656;
 	border: 0;
+	padding: 10px;
 }
 
 #navbutton:hover {
 	background-color: #dbc3a3;
 	border: 0;
+	padding: 10px;
 }
 
 .social {
