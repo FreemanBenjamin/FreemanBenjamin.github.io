@@ -264,12 +264,14 @@ footer {
 	background-color: #565656;
 	border: 0;
 	padding: 10px;
+	border-radius: 0;
 }
 
 #navbutton:hover {
 	background-color: #dbc3a3;
 	border: 0;
 	padding: 10px;
+	border-radius: 0;
 }
 
 .social {
