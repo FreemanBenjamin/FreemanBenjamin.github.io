@@ -287,6 +287,11 @@ footer {
 	text-decoration: none;
 }
 
+#headshot {
+	max-height: 75%;
+	max-width: 75%;
+}
+
 /*Color palette:
 	Blackboard: #55656
 	Oxblood: #76323F
