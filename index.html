@@ -1,13 +1,13 @@
 <!--Code and design by Benjamin Freeman
 	benjamin.freeman2015@gmail.com
-	Copyright Benjamin Freeman 2017-->
+	Copyright Benjamin Freeman 2018-->
 <html>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-	<link href="https://FreemanBenjamin.github.io/stylesheet.css" rel="stylesheet" type="text/css">
+	<link href="https://freemanbenjamin.github.io/stylesheet.css" rel="stylesheet" type="text/css">
 	<script  src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="  crossorigin="anonymous"></script>
 
 	<head>
@@ -32,113 +32,54 @@
 			});
 		</script>
 
-		<div class = "row">
+		<div id = "projects" class = "row">
 			<div class = "col-lg-3"></div>
 			<div class = "col-lg-6 col-md-12" id = "pagecontent">
-				<h1>Latest Project: Conway's Game of Life</h1>
+				<h1>Recipe Saver</h1>
 				<h2>Background</h2>
-				<p>John Conway's "Game of Life" was first introduced to me in a Computational and Applied Mathematics course at Rice University. It was the first "major" project assigned to us in which we had to model the game using MATLAB. I found the game to be quite beautiful in its simplicity, and it is a good chance to practice several programmatic concepts. The "board" consists of a 2D array of cells, and he game takes place autonomously of the user after the conditions and an initial state is set. The basic rules are quite simple:</p>
-
-				<ol>
-					<li>A cell will "live" to the next generation if it has exactly 2 or 3 neighbors.</li>
-					<li>A cell will "die" if it has less than 2 neighbors (underpopulatoin)</li>
-					<li>A cell will "die" if it has more than 3 neighbors (overpopulation)</li>
-					<li>New cells are created when there are 3 "living" neighbors (reproduction)</li>
-				</ol>
-				<p>More information can be found in the <a href = "https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" target = "_blank">Wikipedia article</a>, but this is the essence of the game. 
+					<p>I really enjoy finding new recipes and practicing my cooking skills. One of my favorite sites to find recipes is Serious Eats, and as a result, I have dozens of bookmarked recipes saved on Chrome. When I'm going through the folder looking for ideas, it can be a bit difficult to sort through the list to find what I'm looking for. I also have no way of saving the recipes easily unless I want to copy everything to a word document by hand and reformat it. Using Python, however, I can easily extract webpage information and save it to my computer. The full code for this project can be viewed on my <a href = "https://github.com/FreemanBenjamin/Recipe_Saver">GitHub</a>.</p>
+				<h2>Libraries</h2>
+					<p>In order to simplify the task of extracting recipe information and saving it to a document, I made use of several libraries. The first is <a href = "https://www.crummy.com/software/BeautifulSoup/bs4/doc/">Beautiful Soup</a> which takes an html document and parses and stores the information as a searchable object. The next most important library is <a href = "https://python-docx.readthedocs.io/en/latest/">docx</a> which enables the creation and manipulation of Microsoft Word files. To open images, I utilize the <a href = "https://docs.python.org/3/library/urllib.html">urllib</a>, <a href = "http://docs.python-requests.org/en/master/">Requests</a>, and <a href ="https://docs.python.org/3/library/io.html">io</a> libraries. The combination of these tools helps retrieve and image via a url and open it locally on my computer in order to save it to the document.</p>
 				<h2>Code</h2>
-				<p>Note: This code was primarily a practice exercise for me. I utilized other examples to improve the flow of my code and to determine which libraries would be useful.</p>
-				<p>For this program, we will use the numpy and matplotlib libraries for python. The first thing we will need to do is create our game board (which I will refer to as "grid"):</p>
-				<pre class = "codesnippet">grid = np.zeroes(grid_size, grid_size)</pre>
-				<P>Using numpy, we can generate an nxn grid of zeroes by giving an x and y parameter. Here I use the variable "grid_size" which I will later set by asking the user for an input.</P>
-				<p>Now that we have a board, we need to check for living neighbors. Since we created an array of zeroes, we will represent "dead" cells with a zero value and "live" cells with a value of 1.  Then, it is a simple task of totaling the number of nearest neighbors for each cell and determining if it will be alive or dead in the next generation.</p>
-				<pre class = "codesnippet">def check_for_life(x, y):
-	neighbors = np.sum(grid[x-1:x+2, y-1:y+2]) - grid[x, y]
-	if grid[x, y] and not 2 <= neighbors <= 3:
-		return 0
-	elif neighbors == 3:
-		return 1
-	return grid[x, y]</pre>
-				<p>The check_for_life function takes two parameters x and y for the position of the cell. Then, it sums the values of every adjacent cell (and the cell in question which is subtracted out). If the cell has 2 or 3 neighbors, the function returns 1 and otherwise returns 0. Next, using this function, we can iterate through each generation using the following function:</p>
-				<pre class = "codesnippet">def generations():
-	global grid
-	grid_update = np.copy(grid)
-	for x in range(grid.shape[0]):
-		for y in range(grid.shape[1]):
-			grid_update[x, y] = check_for_life(x, y)
-
-	grid = np.copy(grid_update)</pre>
-				<p>First, we have to create a copy of the grid to write the next generation to. If not, we will be updating the grid values in place and will get an inaccurate value for nearest neighbors. Then, we can iterate across the entire array to create the new grid by calling check_for_life. Finally, this new grid is copied to the "grid" variable once all of the nearest neighbors have been determined. These 2 functions are essentially all that we need to play the game. Now that we have a way to operate the game, we can set our initial seeds. I have provided a dictionary of possible seed options to choose from at the start of the program. From here, I run a series of input functions (and some try/except statements to avoid throwing errors) to ask the user for the board size, number of generations, seed to initialize, and starting coordinates for the seed.</p>
-				<p>To save the board for each generation, we can store each board figure in a list and call the generations function using a simple for loop:</p>
-				<pre class = "codesnippet">gens = []
-for i in range(num_gens):
-	title = plt.text(1, -1, 'Generation ' + str(i))
-	gens.append((plt.imshow(grid, cmap='winter'), title,))
-	generations()</pre>
-				<p>Finally, utilizing matplotlib's animation function, we can visualize the board by displaying a figure for every generation at an interval specified in milliseconds:</p>
-				<pre class = "codesnippet">gens_animation = animation.ArtistAnimation(fig, gens, interval=200, blit=False)</pre> 
-				<p>I've also included some code to save the animation as a .mp4 file for the purpose of showing the animations, but I won't talk through it here.</p>
-				<h2>Putting it All Together</h2>
-				<p>Now that we have the code to play the game and display it, we can run the seeds and see some interesting behaviors. The first class of objects are static which I have not included here. Objects such as a 2x2 square do not result in new life or death and therefore remain constant across multiple generations. The next class of objects are oscillators.</p>
-				<div class = "row">
-					<div class = "col-md-12 col-lg-6">
-						<figure>
-							<img src = "images/blinker.gif"/>
-							<figcaption>Blinker</figcaption>
-						</figure>				
-					</div>
-					<div class = "col-md-12 col-lg-6">
-						<figure>
-							<img src = "images/beacon.gif"/>
-							<figcaption>Beacon</figcaption>
-						</figure>	
-					</div>
-				</div>
-				<p>The simplest forms, such as the Beacon and Blinker patterns above, oscillate across 2 generations. More complex patterns can result in oscillators across more generations or can degenerate into oscillators.</p>
-				<div class = "row">
-					<div class = "col-md-12 col-lg-6">
-						<figure>
-							<img src = "images/pulsar.gif"/>
-							<figcaption>Pulsar</figcaption>
-						</figure>				
-					</div>
-					<div class = "col-md-12 col-lg-6">
-						<figure>
-							<img src = "images/X-pattern.gif"/>
-							<figcaption>X-pattern becoming an oscillator</figcaption>
-						</figure>	
-					</div>
-				</div>
-				<p>Some seeds will eventually find a stable, static result.</p>
-					<figure>
-						<img src = "images/L-pattern.gif"/>
-						<figcaption>L-pattern becoming static</figcaption>
-					</figure>	
-				<p>In some cases, seeds can continue on in perpetuity unless they reach another object or the edge of the game board as can be seen from the Spaceship and Glider below. Some of these patterns can even be generated from other seeds. A famous example is the <a href = "https://en.wikipedia.org/wiki/Gun_(cellular_automaton)#/media/File:Gospers_glider_gun.gif" target = "_blank">Glider Gun</a> as well as the <a href = "https://en.wikipedia.org/wiki/Rake_(cellular_automaton)#/media/File:Rake_selection.gif" target = "_blank">Rake</a>.</p>
-				<div class = "row">
-					<div class = "col-md-12 col-lg-6">
-						<figure>
-							<img src = "images/spaceship.gif"/>
-							<figcaption>Spaceship</figcaption>
-						</figure>				
-					</div>
-					<div class = "col-md-12 col-lg-6">
-						<figure>
-							<img src = "images/glider.gif"/>
-							<figcaption>Glider</figcaption>
-						</figure>	
-					</div>
-				</div>
-				<p>Just for fun, here is another popular pattern known as the R-pentomino. This pattern stabilizes at generation 1103 but starts as only 5 living cells. It creates a number of interesting patterns and is particularly of note because it led to the discovery of the glider.</p>
-				<figure>
-					<img src = "images/r-pentomino.gif"/>
-					<figcaption>R-pentomino</figcaption>
-				</figure>
-				<p>There are countless different seeds with different behaviors, and this code can easily be modified to accomodate them by simply adding a new dictionary entry with the seed name and array of binary values.</p>
+					<p>The initial function, recipe_saver, asks the user if they would like to start saving recipes. If the user chooses yes, then as long as they don't enter "no," they will be prompted to provide a url. This then calls the recipe_scraper function which takes the url as an input. When the user decides to end the program, it will output "Goodbye" as confirmation that it has in fact terminated.</p>
+					<pre class = "codesnippet">def recipe_saver():
+    status = input("Would you like to start saving recipes? Enter 'yes' to save a recipe or 'no' to exit: ")
+    if status == 'no':
+        print('Goodbye')
+    while status != 'no':
+        status = str(input("Please enter a recipe URL or 'no' to exit:"))
+        if status != 'no':
+            recipe_scraper(status)
+    print('Goodbye')</pre>
+    				<p>Once a url has been provided, the recipe_scraper function uses the requests library to access the page. After the information is retrieved, it is parsed and saved as an object by the Beautiful Soup library.</p>
+    				<pre class = "codesnippet">recipe_page = requests.get(recipe_url)
+beautifulsoup_recipe = bs4.BeautifulSoup(recipe_page.content, 'html.parser')</pre>
+    				<p>With the webpage content saved, it is then possible to start extracting snippets of information and storing them for future use. The general method I employed for this is to use the html element tag to find a specific item and remove extra characters/whitespace using the text.strip() method as shown below.</p>
+    				<pre class = "codesnippet">recipe_name = beautifulsoup_recipe.select('''body > div.content-main > section.entry-container > article > header > div > h1''')
+recipe_name = recipe_name[0].text.strip()</pre>
+    				<p>These 2 lines return the title of the recipe as a string. I use this same process for the ingredients, directions, notes, active time, and total time. Getting the recipe image turned out to be a bit more difficult as the Beatiful Soup library does not provide a concise means of saving an image as an object. As a result, I used the following method:</p>
+    				<pre class = "codesnippet">recipe_image = beautifulsoup_recipe.findAll('img')
+recipe_image = str(recipe_image[0]['src'])
+image_req = urllib.request.Request(recipe_image, headers={'User-Agent': '''Mozilla/5.0 (Windows NT 6.1) 
+    AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'''})
+image = urllib.request.urlopen(image_req)
+image_url = io.BytesIO(image.read())</pre>
+    				<p>The first line retrieves all image source urls from the Beautiful Soup object and stores them. I then select the primary recipe image from the list as this is the one that I want to save. Using the requests library and urllib, I am able to access and open the image. My initial attempts to access the imaages resulted in "Forbidden" errors since apparently Serious Eats blocks access attempts by certain means. Finally, I open the image locally using the io library so that I don't have to save the image to my computer separately. From here, I call create_recipe_doc which takes recipe_items (a list of all of the variables saved) as an argument.</p>
+    				<pre class = "codesnippet">create_recipe_doc(recipe_items)</pre>
+                     <p>I can't say that I'm particularly pleased with this method - I ideally should have used classes and objects, but this didn't occur to me until after I was fairly invested in the program. I may return in the future to make this code a bit cleaner. Returning to the functin in question, I initialize the docx file using:</p>
+                     <pre class = "codesnippet">document = Document()</pre>
+                     <p>Then, I can start populating the document by using the add_heading, add_paragraph, and add_picture methods. When I have finished adding all of the relevant information, I store the document file on my computer using document.save(). For brevity, I've removed a few repetitive lines from the example below.</p>
+                     <pre class = "codesnippet">document.add_heading(recipe_name)
+document.add_heading('Active Time: ' + active_time + '\t' + 'Total Time: ' + total_time + '\n', level=2)
+document.add_picture(image_url, width=Inches(6.0))
+document.add_paragraph()
+document.add_heading('Notes', level=2)
+document.add_paragraph(notes + '\n' + extra_notes + '\n')
+...
+document.save(r'C:\Users\Ben\Documents\Recipes\Web Recipes\\' + str(recipe_name) + '.docx')</pre>
+    				<p>As can be seen from the snippet above, I can specify formatting such as spacing and font size when I call the docx functions. The final word document is saved to my computer using a raw string input for the folder location and the recipe name as the file name. An example of the output can be seen <a href = "Braised Chinese-Style Short Ribs With Soy, Orange, and 5-Spice Powder Recipe.docx">here</a> in docx format.</p>
 				<h2>Conclusions</h2>
-				<p>This code was programmatically interesting a in a few ways. First, determining the operations needed to define the rules and iterate over the generations utilizes some very fundamental programming practices and was an interesting logic problem. Addtionally, determining how to let the user interact with the code was quite challenging. Initially, I thought that allowing the user to create a new array for the seed values would be the best approach. However, creating larger arrays can be a bit tedious and leaves a lot of room for error, so I wound up opting for a more uninteractive method. Creating some sort of UI would potentially be a good way to make seed creation more accessible. Finally, this gave me some exposure to the numpy and matplotlib libraries whcih are generally considered to be quite powerful for data analysis, scientific computing, displaying information, and a variety of other uses.</p>
-
-				<p>There are several improvements I could make in the future, but I think primarily that I would look at using classes with cells as objects. I feel that this might be a better way of organizing the code and performing operations. Ultimately, I think that this is a decent representation of the Game of Life, and it was very rewarding to work through.</p>
+					<p>This was my first "practical" project in python, so there's a lot of room for improvement. Primarily, I feel that my decision to use functions instead of an object-oriented approach resulted in slighly messy code (though I would say it is still "pythonic"). In regards to the actual functionality of the program, I would say that it accomplishes exactly what I set out to do. When considering how many recipes I will be saving to my computer, this will save a ton of time. It also will continue to work for future recipes as long as the website is not redesigned; even if this does happen, though, it would be simple enough to update the element tags to new values. Something that I learned as I started this program, though, is that web scraping with Beautiful Soup is not a universal approach because different websites use different html tag schemes and have different information in their recipes. As a result, this code will work exclusively on the Serious Eats website, and I will have to create another program to extract information from other websites. Luckily for me, the vast majority of the recipes I have bookmarked are from Serious Eats!</p>
 			</div>
 			<div class = "col-lg-3"></div>
 				
@@ -146,6 +87,7 @@ for i in range(num_gens):
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	</body>
 	</div>
+
 	<div id="footer"></div>
 
 	<script type = "text/javascript">
