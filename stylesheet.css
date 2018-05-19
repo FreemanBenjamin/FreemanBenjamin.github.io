@@ -66,6 +66,10 @@ body{
 
 }
 
+.dropdown:hover .dropdown-menu {
+	display: block;
+}
+
 .dropdown-menu {
 	background-color: #565656;
 	padding: 0;
