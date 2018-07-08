@@ -1,0 +1,128 @@
+<!--Code and design by Benjamin Freeman
+	benjamin.freeman2015@gmail.com -->
+<html>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+	<link href="https://freemanbenjamin.github.io/stylesheet.css" rel="stylesheet" type="text/css">
+	<script  src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="  crossorigin="anonymous"></script>
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title> 
+			Benjamin Freeman - Materials Engineer
+		</title>
+	</head>
+
+	<div id = "container-fluid">
+	<body>
+		<header>
+			<b><div>Benjamin Freeman<br></div>
+			<div id = "subtitle">Materials Engineer</div></b>
+		</header>
+
+		<div id="navbar"></div>
+
+		<script type = "text/javascript">
+			$(document).ready(function(){
+  				$("#navbar").load("navbar.html");
+			});
+		</script>
+
+		<div id = "projects" class = "row">
+			<div class = "col-lg-3"></div>
+			<div class = "col-lg-6 col-md-12 pagecontent">
+				<h1>Diploma Frame</h1>
+				<p>Over the past 2.5 months, I have been working on a diploma frame as a graduation gift for my girlfriend. I probably could have knocked it out sooner, but it's difficult to work for too long outside in Texas summer heat. The only design constraints for this project were that the frame needed to hold an 11" x 14" sheet of glass, and ideally it would have a 3/4" rabbet to hold the glass, diploma, mat, and backing. I tend to prefer fairly minimalist styles, so I kept things pretty simple. For the frame edges, I bought a 1.25" x 3" x 36" padauk board which has a nice light red color when freshly milled and that darkens to brown over time. I also bought a 1/8" thick length of maple to make spline joints on the corners and provide a bit of contrast.</p>
+				<div class = "row">
+					<div class = "col"></div>
+					<figure class = "col-md-12 col-lg-6">
+						<img src = "images/padauk.jpg"/>
+						<figcaption>Padauk board</figcaption>
+					</figure>
+					<div class = "col"></div>
+				</div>
+				<p>After making some practice cuts using scrap wood, I started by cutting a 15 degree bevel across the face of the padauk board. I set the height of the saw blade to be about 0.75" which was roughly half of my final intended frame width. I then rotated the board 180 degrees and made the same cut to get the result shown below. The primary reason I did not rip the board first was to make it easier to work with on the table saw. Thin pieces are harder to push and keep straight while cutting on a table saw.</p>				
+				<div class = "row">
+					<div class = "ccol-md-12 col-lg-6">
+						<figure>
+							<img src = "images/bevel.jpg"/>
+							<figcaption>After cutting the bevel</figcaption>
+						</figure>
+					</div>
+				</div>
+				<p>Once the bevel was finished, I used a plunge router to make the rabbet as I do not have access to a table router. Making multiple small passes, I used the plunge router to remove 0.75" depth and 1/2" width from each side of the board.</p>
+				<div class = "row">
+					<div class = "col-md-12 col-lg-6">
+						<figure>
+							<img src = "images/rabbet.jpg"/>
+							<figcaption>Rabbet from back side</figcaption>
+						</figure>
+					</div>
+					<div class = "ccol-md-12 col-lg-6">
+						<figure>
+							<img src = "images/rabbet_2.jpg"/>
+							<figcaption>Rabbet from front side</figcaption>
+						</figure>
+					</div>
+				</div>
+				<p>Now that the rabbet was cut, I again used the table saw to rip the board lengthwise. This gave me roughly 1.5" wide boards (which wound up being closer to 1.375" boards after sanding).</p>
+				<div class = "row">
+					<div class = "ccol-md-12 col-lg-6">
+						<figure>
+							<img src = "images/ripped.jpg"/>
+							<figcaption>Ripped board</figcaption>
+						</figure>
+					</div>
+				</div>
+				<p>From here, I then measured two 11" pieces and two 14" pieces along the length of the rabbet. This was the starting point for my 45 degree miter cuts. I gave myself a bit of extra room to make sure that none of my frame segments would be too short and took thin slices off of the ends of the pieces with too much extra length. Once the cuts were made, I used a jig (pictured below) and clamps to glue the corners of the frame together. To compensate for any gaps in the miter cuts, I mixed some wood glue and sawdust and filled in the corners.</p>
+				<div class = "row">
+					<div class = "col-md-12 col-lg-6">
+						<figure>
+							<img src = "images/jig.jpg"/>
+							<figcaption>Corner jig</figcaption>
+						</figure>
+						<figure>
+							<img src = "images/glued_back.jpg"/>
+							<figcaption>After gluing - back side</figcaption>
+						</figure>
+					</div>
+					<div class = "ccol-md-12 col-lg-6">
+						<figure>
+							<img src = "images/glued.jpg"/>
+							<figcaption>After gluing - front side</figcaption>
+						</figure>
+					</div>
+				</div>
+				<p>Then, using this same jig, I clamped the frame in place and ran it along the table saw with the blade striking the center of the corners. This created a gap for the maple splines to be inserted which adds contrast and strengthens the corner joints. When all four corners were cut, I put triangles of the maple that were cut using a coping saw. These were glued into place and sanded to be flush with the surface of the padauk.</p>
+				<div class = "row">
+					<div class = "ccol-md-12 col-lg-6">
+						<figure>
+							<img src = "images/spline.jpg"/>
+							<figcaption>Maple spline joint</figcaption>
+						</figure>
+					</div>
+				</div>
+				<p>Then, I applied successive coats of lacquer to protect the wood and give it a nice shine. To finish the frame, I will still need to add the hardware (backing clips, wall hanging bracket) and cut a mat to fill the space between the diploma and frame edges. I will post the final photos here soon.</p>
+				<h2>Final thoughts</h2>
+				<p>It is worth noting that I skipped over many of the nuances of this project that made it fairly challenging. Primarily, this was an important lesson about having the right tools for the job. I made many substitutions (such as the router) that got the job done but which took more time or made the project more challenging. I also struggled with the padauk throughout the process - almost to the point of scrapping it and starting over. The board was not properly dried, and it had significant cupping which made it impossible to make accurate cuts. As a result, I was forced to let it sit in the sun to dry out on multiple occasions before working with it. Even after gluing the frame togther, there was signiificant warping. Before I cut the splines, I used damp rags and placed a lot of weight evenly on the frame to force it to lay flat. Eventually, it did straighten out, and with the spline joints in place it has finlally stopped warping. Finally, for the sake of brevity, I did not include every instance of sanding in my procedure since I probably did at least some light sanding after every step. Despite outward appearances, even this simple frame required a lot of nuance and time, but I now have a much better understanding of woodworking processes and tools. Hopefully I will be able to avoid some of these problems in the future, and I would definitely consider doing it again.
+			</div>
+			<div class = "col-lg-3"></div>
+				
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	</body>
+	</div>
+
+	<div id="footer"></div>
+
+	<script type = "text/javascript">
+		$(document).ready(function(){
+			$("#footer").load("footer.html");
+		});
+	</script>
+
+	</div>
+</html>

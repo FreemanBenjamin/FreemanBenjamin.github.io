@@ -170,7 +170,7 @@ p > a:visited {
 	margin-left: 10px;
 }
 
-#pagecontent {
+.pagecontent {
 	padding-left: 20px;
 	padding-top: 0px;
 	font-family: 'Playfair Display', serif;
