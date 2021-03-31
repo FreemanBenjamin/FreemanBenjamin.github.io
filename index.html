@@ -33,12 +33,12 @@
 
 		<div id = "projects" class = "row">
 			<div class = "col-lg-3"></div>
-			<div class = "col-lg-12 col-md-12 pagecontent">
-				<h1>Latest Project: Topographic Map</h1>
+			<div class = "col-lg-6 col-md-12 pagecontent">
+				<h1>Topographic Map</h1>
 				<p>While working at 3D Print Texas, I had a client reach out to ask if it was possible to print a topographic map of land that he owns in Central Texas. While I knew that this would be possible based on previous models I had seen, this was my first time going through the process of creating a full-color 3D model for printing. The USGS map below contains the area of interest.</p>
 				<div class = "row">
 					<div class = "col"></div>
-					<figure class = "col-md-12 col-lg-12">
+					<figure class = "col-md-12 col-lg-6">
 						<img src = "images/Waring.png"/>
 						<figcaption>USGS Topograhic Map of Area</figcaption>
 					</figure>
@@ -57,7 +57,7 @@
 				<p>I then increased the contrast level slightly in photoshop to make the elevation changes more dramatic. I imported this photo into Blender and merged it onto a 8" x 8" plane. Using Blender's displacement modifier, I was able to easily generate a 3D surface of the terrain. I tweaked the strength of the displacement to make the elevation changes more obvious. </p>
 				<div class = "row">
 					<div class = "col"></div>
-					<figure class = "col-md-12 col-lg-12">
+					<figure class = "col-md-12 col-lg-6">
 						<img src = "images/waring_surface.png"/>
 							<figcaption>Displaced Surface Body</figcaption>
 						</figure>						
@@ -66,7 +66,7 @@
 				<p>After applying the displacement modifier, I then needed to give the surface body thickness. I extruded the surface down roughly 1cm and flattened the base of the model.</p>
 				<div class = "row">
 					<div class = "col"></div>
-					<figure class = "col-md-12 col-lg-12">
+					<figure class = "col-md-12 col-lg-6">
 						<img src = "images/Extruded_Waring.jpg"/>
 							<figcaption>Terrain After Extrusion</figcaption>
 						</figure>						
@@ -75,7 +75,7 @@
 				<p>To reduce the cost of printing, I then hollowed out the interior of the model and removed the back face leaving a 1.5mm thick shell. This provided sufficient strength to prevent the model from being fragile while also substantially lowering the cost for the client.</p>
 				<div class = "row">
 					<div class = "col"></div>
-					<figure class = "col-md-12 col-lg-12">
+					<figure class = "col-md-12 col-lg-6">
 						<img src = "images/waring_hollow.jpg"/>
 							<figcaption>Back Side of Model Showing Hollowing Operation</figcaption>
 						</figure>						
@@ -84,7 +84,7 @@
 				<p>Finally, I needed to apply the topographic map image to the surface of the part. In order to do this, I first lined up the map image with the bitmap image in Photoshop and cropped them to be the same size. I also increased the color contrast to make sure that the colors would be deep enough after printing. This image was then applied to the top face of the model as a texture using Blender, and the file was exported as a .obj and .mtl file for printing. The files were imported into GrabCAD Print and printed using Vero-Vivid colors on our J750 PolyJet printer.</p>
 				<div class = "row">
 					<div class = "col"></div>
-					<figure class = "col-md-12 col-lg-12">
+					<figure class = "col-md-12 col-lg-6">
 						<img src = "images/Final_Waring.jpg"/>
 							<figcaption>Model with Map Texture Applied</figcaption>
 						</figure>						
