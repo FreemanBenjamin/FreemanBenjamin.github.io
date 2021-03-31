@@ -33,52 +33,86 @@
 
 		<div id = "projects" class = "row">
 			<div class = "col-lg-3"></div>
-			<div class = "col-lg-6 col-md-12 pagecontent">
-				<h1>Latest Project: Recipe Saver</h1>
-				<h2>Background</h2>
-					<p>I really enjoy finding new recipes and practicing my cooking skills. One of my favorite sites to find recipes is Serious Eats, and as a result, I have dozens of bookmarked recipes saved on Chrome. When I'm going through the folder looking for ideas, it can be a bit difficult to sort through the list to find what I'm looking for. I also have no way of saving the recipes easily unless I want to copy everything to a word document by hand and reformat it. Using Python, however, I can easily extract webpage information and save it to my computer. The full code for this project can be viewed on my <a href = "https://github.com/FreemanBenjamin/Recipe_Saver">GitHub</a>.</p>
-				<h2>Libraries</h2>
-					<p>In order to simplify the task of extracting recipe information and saving it to a document, I made use of several libraries. The first is <a href = "https://www.crummy.com/software/BeautifulSoup/bs4/doc/">Beautiful Soup</a> which takes an html document and parses and stores the information as a searchable object. The next most important library is <a href = "https://python-docx.readthedocs.io/en/latest/">docx</a> which enables the creation and manipulation of Microsoft Word files. To open images, I utilize the <a href = "https://docs.python.org/3/library/urllib.html">urllib</a>, <a href = "http://docs.python-requests.org/en/master/">Requests</a>, and <a href ="https://docs.python.org/3/library/io.html">io</a> libraries. The combination of these tools helps retrieve and image via a url and open it locally on my computer in order to save it to the document.</p>
-				<h2>Code</h2>
-					<p>The initial function, recipe_saver, asks the user if they would like to start saving recipes. If the user chooses yes, then as long as they don't enter "no," they will be prompted to provide a url. This then calls the recipe_scraper function which takes the url as an input. When the user decides to end the program, it will output "Goodbye" as confirmation that it has in fact terminated.</p>
-					<pre class = "codesnippet">def recipe_saver():
-    status = input("Would you like to start saving recipes? Enter 'yes' to save a recipe or 'no' to exit: ")
-    if status == 'no':
-        print('Goodbye')
-    while status != 'no':
-        status = str(input("Please enter a recipe URL or 'no' to exit:"))
-        if status != 'no':
-            recipe_scraper(status)
-    print('Goodbye')</pre>
-    				<p>Once a url has been provided, the recipe_scraper function uses the requests library to access the page. After the information is retrieved, it is parsed and saved as an object by the Beautiful Soup library.</p>
-    				<pre class = "codesnippet">recipe_page = requests.get(recipe_url)
-beautifulsoup_recipe = bs4.BeautifulSoup(recipe_page.content, 'html.parser')</pre>
-    				<p>With the webpage content saved, it is then possible to start extracting snippets of information and storing them for future use. The general method I employed for this is to use the html element tag to find a specific item and remove extra characters/whitespace using the text.strip() method as shown below.</p>
-    				<pre class = "codesnippet">recipe_name = beautifulsoup_recipe.select('''body > div.content-main > section.entry-container > article > header > div > h1''')
-recipe_name = recipe_name[0].text.strip()</pre>
-    				<p>These 2 lines return the title of the recipe as a string. I use this same process for the ingredients, directions, notes, active time, and total time. Getting the recipe image turned out to be a bit more difficult as the Beatiful Soup library does not provide a concise means of saving an image as an object. As a result, I used the following method:</p>
-    				<pre class = "codesnippet">recipe_image = beautifulsoup_recipe.findAll('img')
-recipe_image = str(recipe_image[0]['src'])
-image_req = urllib.request.Request(recipe_image, headers={'User-Agent': '''Mozilla/5.0 (Windows NT 6.1) 
-    AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'''})
-image = urllib.request.urlopen(image_req)
-image_url = io.BytesIO(image.read())</pre>
-    				<p>The first line retrieves all image source urls from the Beautiful Soup object and stores them. I then select the primary recipe image from the list as this is the one that I want to save. Using the requests library and urllib, I am able to access and open the image. My initial attempts to access the imaages resulted in "Forbidden" errors since apparently Serious Eats blocks access attempts by certain means. Finally, I open the image locally using the io library so that I don't have to save the image to my computer separately. From here, I call create_recipe_doc which takes recipe_items (a list of all of the variables saved) as an argument.</p>
-    				<pre class = "codesnippet">create_recipe_doc(recipe_items)</pre>
-                     <p>I can't say that I'm particularly pleased with this method - I ideally should have used classes and objects, but this didn't occur to me until after I was fairly invested in the program. I may return in the future to make this code a bit cleaner. Returning to the function in question, I initialize the docx file using:</p>
-                     <pre class = "codesnippet">document = Document()</pre>
-                     <p>Then, I can start populating the document by using the add_heading, add_paragraph, and add_picture methods. When I have finished adding all of the relevant information, I store the document file on my computer using document.save(). For brevity, I've removed a few repetitive lines from the example below.</p>
-                     <pre class = "codesnippet">document.add_heading(recipe_name)
-document.add_heading('Active Time: ' + active_time + '\t' + 'Total Time: ' + total_time + '\n', level=2)
-document.add_picture(image_url, width=Inches(6.0))
-document.add_paragraph()
-document.add_heading('Notes', level=2)
-document.add_paragraph(notes + '\n' + extra_notes + '\n')
-...
-document.save(r'C:\Users\Ben\Documents\Recipes\Web Recipes\\' + str(recipe_name) + '.docx')</pre>
-    				<p>As can be seen from the snippet above, I can specify formatting such as spacing and font size when I call the docx functions. The final word document is saved to my computer using a raw string input for the folder location and the recipe name as the file name. An example of the output can be seen <a href = "Braised Chinese-Style Short Ribs With Soy, Orange, and 5-Spice Powder Recipe.docx">here</a> in docx format.</p>
-				<h2>Conclusions</h2>
-					<p>This was my first "practical" project in python, so there's a lot of room for improvement. Primarily, I feel that my decision to use functions instead of an object-oriented approach resulted in slighly messy code (though I would say it is still "pythonic"). In regards to the actual functionality of the program, I would say that it accomplishes exactly what I set out to do. When considering how many recipes I will be saving to my computer, this will save a ton of time. It also will continue to work for future recipes as long as the website is not redesigned; even if this does happen, though, it would be simple enough to update the element tags to new values. Something that I learned as I started this program, though, is that web scraping with Beautiful Soup is not a universal approach because different websites use different html tag schemes and have different information in their recipes. As a result, this code will work exclusively on the Serious Eats website, and I will have to create another program to extract information from other websites. Luckily for me, the vast majority of the recipes I have bookmarked are from Serious Eats!</p>
+			<div class = "col-lg-12 col-md-12 pagecontent">
+				<h1>Latest Project: Topographic Map</h1>
+				<p>While working at 3D Print Texas, I had a client reach out to ask if it was possible to print a topographic map of land that he owns in Central Texas. While I knew that this would be possible based on previous models I had seen, this was my first time going through the process of creating a full-color 3D model for printing. The USGS map below contains the area of interest.</p>
+				<div class = "row">
+					<div class = "col"></div>
+					<figure class = "col-md-12 col-lg-12">
+						<img src = "images/Waring.png"/>
+						<figcaption>USGS Topograhic Map of Area</figcaption>
+					</figure>
+					<div class = "col"></div>
+				</div>
+				<p></p>				
+				<p>In order to generate a 3D model, I first needed to download a suitable heightmap of the area. I chose the USGS National Elevation Dataset, 10m resolution and downloaded a bitmap/grayscale image of the area.</p>
+				<div class = "row">
+					<div class = "col"></div>
+					<figure class = "col-md-12 col-lg-6">
+						<img src = "images/Waring_Height_Map.png"/>
+							<figcaption>Grayscale Elevation Data</figcaption>
+					</figure>
+					<div class = "col"></div>
+				</div>
+				<p>I then increased the contrast level slightly in photoshop to make the elevation changes more dramatic. I imported this photo into Blender and merged it onto a 8" x 8" plane. Using Blender's displacement modifier, I was able to easily generate a 3D surface of the terrain. I tweaked the strength of the displacement to make the elevation changes more obvious. </p>
+				<div class = "row">
+					<div class = "col"></div>
+					<figure class = "col-md-12 col-lg-12">
+						<img src = "images/waring_surface.png"/>
+							<figcaption>Displaced Surface Body</figcaption>
+						</figure>						
+					<div class = "col"></div>
+				</div>
+				<p>After applying the displacement modifier, I then needed to give the surface body thickness. I extruded the surface down roughly 1cm and flattened the base of the model.</p>
+				<div class = "row">
+					<div class = "col"></div>
+					<figure class = "col-md-12 col-lg-12">
+						<img src = "images/Extruded_Waring.jpg"/>
+							<figcaption>Terrain After Extrusion</figcaption>
+						</figure>						
+					<div class = "col"></div>
+				</div>
+				<p>To reduce the cost of printing, I then hollowed out the interior of the model and removed the back face leaving a 1.5mm thick shell. This provided sufficient strength to prevent the model from being fragile while also substantially lowering the cost for the client.</p>
+				<div class = "row">
+					<div class = "col"></div>
+					<figure class = "col-md-12 col-lg-12">
+						<img src = "images/waring_hollow.jpg"/>
+							<figcaption>Back Side of Model Showing Hollowing Operation</figcaption>
+						</figure>						
+					<div class = "col"></div>
+				</div>
+				<p>Finally, I needed to apply the topographic map image to the surface of the part. In order to do this, I first lined up the map image with the bitmap image in Photoshop and cropped them to be the same size. I also increased the color contrast to make sure that the colors would be deep enough after printing. This image was then applied to the top face of the model as a texture using Blender, and the file was exported as a .obj and .mtl file for printing. The files were imported into GrabCAD Print and printed using Vero-Vivid colors on our J750 PolyJet printer.</p>
+				<div class = "row">
+					<div class = "col"></div>
+					<figure class = "col-md-12 col-lg-12">
+						<img src = "images/Final_Waring.jpg"/>
+							<figcaption>Model with Map Texture Applied</figcaption>
+						</figure>						
+					<div class = "col"></div>
+				</div>
+				<h2>The Finished Product</h2>
+				<div class = "row">
+					<div class = "col-lg-2"></div>
+					<div class = "col-lg-8 col-md-12 pagecontent">
+						<figure>
+							<img src = "images/Printed_Waring_1.jpg">
+							<figcaption>Final Printed Piece</figcaption>
+						</figure>						
+					</div>
+					<div class = "col-lg-2"></div>
+				</div>
+				<div class = "row">
+					<div class = "col-lg-2"></div>
+					<div class = "col-lg-8 col-md-12 pagecontent">
+						<figure>
+							<img src = "images/Printed_Waring_2.jpg">
+							<figcaption>Final Printed Piece (Alternate View)</figcaption>
+						</figure>						
+					</div>
+					<div class = "col-lg-2"></div>
+				</div>
+				<h2>Final thoughts</h2>
+				<p>This was a somewhat challenging project that really took full advantage of the full-color capabilities and high level of detail offered by PolyJet Printing. This was the most involved project I have attempted involving textures, and it was the first time that I had used Blender to create a 3D model. I initially had tried using Photoshop's 3D tools to generate a textured 3D model, but I felt that it was too limited to accomplish what I needed. Now that I know the process, I could likely generate similar topographic models in less than an hour. The client really liked the final product, and now they have a high quality piece for their home or office.</p> 
 			</div>
 			<div class = "col-lg-3"></div>
 				
