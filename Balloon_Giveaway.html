@@ -1,0 +1,113 @@
+<!--Code and design by Benjamin Freeman
+	benjamin.freeman2015@gmail.com -->
+    <html>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        <link href="https://freemanbenjamin.github.io/stylesheet.css" rel="stylesheet" type="text/css">
+        <script  src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="  crossorigin="anonymous"></script>
+    
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title> 
+                Benjamin Freeman - Materials Engineer
+            </title>
+        </head>
+    
+        <div id = "container-fluid">
+        <body>
+            <header>
+                <b><div>Benjamin Freeman<br></div>
+                <div id = "subtitle">Materials Engineer</div></b>
+            </header>
+    
+            <div id="navbar"></div>
+    
+            <script type = "text/javascript">
+                $(document).ready(function(){
+                      $("#navbar").load("navbar.html");
+                });
+            </script>
+    
+            <div id = "projects" class = "row">
+                <div class = "col-lg-3"></div>
+                <div class = "col-lg-6 col-md-12 pagecontent">
+                    <h1>Titanium L-PBF Balloon Giveaway</h1>
+                    <p>Each year, the additive manufacturing team and Jabil Albuquerque has produced a few "fun" builds as giveaways for the site staff around the end of the year. In 2021, we produced a few hundred Star Wars Death Star keychains, and in 2022, we built some lattice 
+                        orb ornaments. Both of these giveaways were taken from free online files, and they required a significant amount of post-processing with rotary tools and a significant amount of grit blasting to remove the support structures. For 2023, I decided to design
+                        a giveaway that was a little more relevant to our site and that would take less hand work to clean up.
+                    </p>
+                    <div class = "row">
+                        <div class = "col"></div>
+                        <figure class = "col-md-12 col-lg-8">
+                            <img src = "images/Previous_Giveaways.png"/>
+                            <figcaption>Previous Giveaways</figcaption>
+                        </figure>
+                        <div class = "col"></div>
+                    </div>
+                    <p></p>				
+                    <p>Since Albuquerue is home to the largest annual International Balloon Fiesta, I decided to make a roughly 3" tall balloon ornament. Using Solidworks, I created a sweep for the balloon profile and patterned it in a circle. I then created a solid profile to add
+                         thickness to the walls of the balloon (1.5 mm). The basket at the base was created from a simple loft, and I used another loft to merge the basket to the balloon itself. I made square cuts with fillets to give the appearance of gaps between the basket and balloon.
+                         This allowed the balloon to be printed without additional supports or risk of warping. At the top, I created a small feature for a ribbon or hook which also doubled as a drain hole for the unsintered powder. The first iteration of the balloon had a horizontal bar
+                         which failed to print without support. The second iteration had a small arch to allow it to be self-supporting. I also added the embossed "Albuquerque" text on the side of the balloon to make the model a bit less plain.
+                    </p>
+                    <div class = "row">
+                        <div class = "col"></div>
+                        <figure class = "col-md-12 col-lg-8">
+                            <img src = "images/Balloon_CAD"/>
+                                <figcaption>Balloon Model in Solidworks</figcaption>
+                        </figure>
+                        <div class = "col"></div>
+                    </div>
+                    <p>In order to make sure that the text printed successfully, I had to tilt the balloon slightly (5 degrees) about the X axis so that the text faced slightly upwards. The only supports present in the entire build are the perforated supports at the base of the basket.
+                        This ensured that the model was easy to remove from the build plate and that there was minimal post-processing needed to clean up the parts. I increased the laser scan speed about 20% from the defaults and used 60 µm to minimize build time since around 600 parts
+                        were needed for everyone at the site to receive a copy.</p>
+                    <div class = "row">
+                        <div class = "col"></div>
+                        <figure class = "col-md-12 col-lg-8">
+                            <img src = "images/balloon_Print.png"/>
+                                <figcaption>Balloon Print File Setup</figcaption>
+                            </figure>						
+                        <div class = "col"></div>
+                    </div>
+                    <p>In the end, I was able to fit 32 parts per build, and each build took approximately 21 hours. Unpacking and post-processing were extremely simple - the balloons were able to be tilted to the side to break them away from the supports, and the powder was Albuquerque
+                        to flow out once the parts were inverted. Each part needed about 15 seconds with a flat hand file to remove the burrs left by the supports, and they were then tumbled and blasted with grit for about 5-10 minutes per batch. Using 2 printers, we were able to produce enough parts for the site across roughly 20 builds.
+                    </p>
+                    <div class = "row">
+                        <div class = "col"></div>
+                        <figure class = "col-md-12 col-lg-8">
+                            <img src = "images/Balloon_Final.jpg"/>
+                                <figcaption>Balloon Ornament After Post-Processing</figcaption>
+                            </figure>						
+                        <div class = "col"></div>
+                    </div>
+                    <h2>Finished Product</h2>
+                    <div class = "row">
+                        <div class = "col"></div>
+                        <figure class = "col-md-12 col-lg-8">
+                            <img src = "images/Balloon_Tree.jpg"/>
+                                <figcaption>Balloon Ornament on Our Tree</figcaption>
+                            </figure>						
+                        <div class = "col"></div>
+                    </div>                    
+                </div>
+                <div class = "col-lg-3"></div>
+                    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        </body>
+        </div>
+    
+        <div id="footer"></div>
+    
+        <script type = "text/javascript">
+            $(document).ready(function(){
+                $("#footer").load("footer.html");
+            });
+        </script>
+    
+        </div>
+    </html>
+    
